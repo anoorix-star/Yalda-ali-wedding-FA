@@ -285,6 +285,17 @@
                 opacity: 0;
             }
         }
+
+        /* RSVP Message Styles */
+        #rsvpSuccessMessage {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -447,40 +458,58 @@
 
     <!-- RSVP Section -->
     <section class="max-w-2xl mx-auto px-6 mb-32 reveal">
-        <div class="bg-white/70 backdrop-blur-md rounded-[3.5rem] p-12 md:p-16 shadow-xl shadow-stone-200/50 text-center border border-white">
-            <h2 class="section-title-main">تأیید حضور</h2>
-            <p class="text-stone-600 text-xl mb-12 font-light">
-                برای کمک به ما در برنامه‌ریزی دقیق این روز، لطفاً تا تاریخ<br>
-                <span class="font-bold text-stone-900 border-b-2 border-sage/30">۱۰.۰۳.۲۰۲۶</span> به ما اطلاع دهید.
-            </p>
-            
-            <form id="rsvpForm" class="space-y-8 text-right">
-                <div>
-                    <label class="rsvp-label">نام شما</label>
-                    <input type="text" placeholder="نام مهمانان..." class="form-input">
-                </div>
+        <div id="rsvpContainer" class="bg-white/70 backdrop-blur-md rounded-[3.5rem] p-12 md:p-16 shadow-xl shadow-stone-200/50 text-center border border-white">
+            <div id="rsvpFormContent">
+                <h2 class="section-title-main">تأیید حضور</h2>
+                <p class="text-stone-600 text-xl mb-12 font-light">
+                    برای کمک به ما در برنامه‌ریزی دقیق این روز، لطفاً تا تاریخ<br>
+                    <span class="font-bold text-stone-900 border-b-2 border-sage/30">۱۰.۰۳.۲۰۲۶</span> به ما اطلاع دهید.
+                </p>
                 
-                <div>
-                    <label class="rsvp-label">آیا در مراسم شرکت می‌کنید؟</label>
-                    <div class="relative">
-                        <select class="form-input bg-white/90 appearance-none cursor-pointer">
-                            <option value="">لطفاً انتخاب کنید...</option>
-                            <option value="yes">بله، با کمال میل</option>
-                            <option value="no">متأسفانه خیر</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-stone-400">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <form id="rsvpForm" class="space-y-8 text-right">
+                    <div>
+                        <label class="rsvp-label">نام شما</label>
+                        <input type="text" id="guestName" required placeholder="نام مهمانان..." class="form-input">
+                    </div>
+                    
+                    <div>
+                        <label class="rsvp-label">آیا در مراسم شرکت می‌کنید؟</label>
+                        <div class="relative">
+                            <select id="attendanceStatus" required class="form-input bg-white/90 appearance-none cursor-pointer">
+                                <option value="">لطفاً انتخاب کنید...</option>
+                                <option value="yes">بله، با کمال میل</option>
+                                <option value="no">متأسفانه خیر</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-stone-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="rsvp-label">پیام</label>
-                    <textarea placeholder="پیام شما برای ما..." rows="4" class="form-input resize-none"></textarea>
-                </div>
+                    <div>
+                        <label class="rsvp-label">پیام</label>
+                        <textarea id="guestMessage" placeholder="پیام شما برای ما..." rows="4" class="form-input resize-none"></textarea>
+                    </div>
 
-                <button type="submit" class="map-btn py-5 text-xl mt-6 shadow-xl shadow-sage/30 font-bold">ارسال پاسخ</button>
-            </form>
+                    <button type="submit" id="rsvpSubmitBtn" class="map-btn py-5 text-xl mt-6 shadow-xl shadow-sage/30 font-bold">ارسال پاسخ</button>
+                </form>
+            </div>
+
+            <!-- Success Message (Initially Hidden) -->
+            <div id="rsvpSuccessMessage">
+                <div class="flex justify-center mb-8">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-bold text-stone-800 mb-4">با تشکر!</h2>
+                <p class="text-stone-600 text-xl leading-relaxed">
+                    پاسخ شما با موفقیت ثبت شد.<br>
+                    از اینکه ما را در جریان حضور خود قرار دادید سپاسگزاریم.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -497,8 +526,25 @@
         const musicOnIcon = document.getElementById("musicOn");
         const musicOffIcon = document.getElementById("musicOff");
         const musicWrapper = document.querySelector(".music-wrapper");
+        const rsvpForm = document.getElementById('rsvpForm');
+        const rsvpFormContent = document.getElementById('rsvpFormContent');
+        const rsvpSuccessMessage = document.getElementById('rsvpSuccessMessage');
+        const rsvpSubmitBtn = document.getElementById('rsvpSubmitBtn');
+
         let hasInteracted = false;
         let heartInterval;
+
+        // Check if user has already submitted from this device
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('wedding_rsvp_submitted')) {
+                showRSVPSuccess();
+            }
+        });
+
+        function showRSVPSuccess() {
+            rsvpFormContent.style.display = 'none';
+            rsvpSuccessMessage.style.display = 'block';
+        }
 
         function createHeart() {
             const heart = document.createElement("div");
@@ -571,16 +617,25 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        // RSVP Form Submission Handling
+        rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = this.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "در حال ارسال...";
-            btn.disabled = true;
+            
+            // UI Feedback
+            rsvpSubmitBtn.innerText = "در حال ارسال...";
+            rsvpSubmitBtn.disabled = true;
+
+            // Simulate Network delay
             setTimeout(() => {
-                btn.innerText = "سپاس! پاسخ شما ثبت شد.";
-                btn.style.backgroundColor = "#2d2d2d";
-            }, 1200);
+                // Store submission status in browser
+                localStorage.setItem('wedding_rsvp_submitted', 'true');
+                
+                // Show success UI
+                showRSVPSuccess();
+                
+                // Scroll slightly to ensure visibility
+                document.getElementById('rsvpContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
         });
     </script>
 </body>
