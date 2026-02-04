@@ -25,6 +25,7 @@
             --sage-dark: #6b7a65;
             --bg-color: #f2ede8; 
             --text-main: #4a4a4a;
+            --music-green: #22c55e;
         }
 
         body {
@@ -189,12 +190,18 @@
             font-weight: 300;
         }
 
-        /* Music Control Button */
-        .music-control {
+        /* Music Control Button & Heart Animation */
+        .music-wrapper {
             position: fixed;
             bottom: 20px;
             left: 20px;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-control {
             background: white;
             border-radius: 50%;
             width: 45px;
@@ -205,6 +212,39 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             cursor: pointer;
             border: none;
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+            color: currentColor;
+        }
+        
+        /* Green state when playing */
+        .music-control.is-playing {
+            background: var(--music-green);
+            color: white;
+        }
+
+        .heart {
+            position: absolute;
+            color: #e11d48;
+            pointer-events: none;
+            animation: float-heart 2.5s ease-out forwards;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1.2);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -216,10 +256,12 @@
         Ihr Browser unterstützt das Audio-Element nicht.
     </audio>
 
-    <button id="musicBtn" class="music-control" onclick="toggleMusic()">
-        <svg id="musicOn" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-        <svg id="musicOff" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-    </button>
+    <div class="music-wrapper">
+        <button id="musicBtn" class="music-control" onclick="toggleMusic()">
+            <svg id="musicOn" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <svg id="musicOff" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+        </button>
+    </div>
 
     <!-- Header Section -->
     <header class="pt-24 pb-12 text-center reveal">
@@ -406,20 +448,53 @@
     </footer>
 
     <script>
-        // Musik-Logik
+        // Musik & Heart Logic
         const music = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
         const musicOnIcon = document.getElementById("musicOn");
         const musicOffIcon = document.getElementById("musicOff");
+        const musicWrapper = document.querySelector(".music-wrapper");
         let hasInteracted = false;
+        let heartInterval;
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+            heart.className = "heart";
+            
+            // Random translation values for movement
+            const tx = (Math.random() - 0.5) * 200;
+            const ty = -Math.random() * 200 - 50;
+            heart.style.setProperty('--tx', `${tx}px`);
+            heart.style.setProperty('--ty', `${ty}px`);
+            
+            musicWrapper.appendChild(heart);
+            
+            // Remove element after animation ends
+            setTimeout(() => {
+                heart.remove();
+            }, 2500);
+        }
+
+        function startHearts() {
+            if (!heartInterval) {
+                heartInterval = setInterval(createHeart, 400);
+            }
+        }
+
+        function stopHearts() {
+            clearInterval(heartInterval);
+            heartInterval = null;
+        }
 
         // Funktion zum Starten der Musik
         function playMusic() {
             if (!hasInteracted) {
                 music.play().then(() => {
                     hasInteracted = true;
-                    updateMusicIcons();
+                    updateMusicUI();
+                    startHearts();
                 }).catch(err => {
-                    // Autoplay wurde wahrscheinlich blockiert
                     console.log("Autoplay blockiert. Warten auf Interaktion...");
                 });
             }
@@ -429,19 +504,23 @@
             if (music.paused) {
                 music.play();
                 hasInteracted = true;
+                startHearts();
             } else {
                 music.pause();
+                stopHearts();
             }
-            updateMusicIcons();
+            updateMusicUI();
         }
 
-        function updateMusicIcons() {
+        function updateMusicUI() {
             if (music.paused) {
                 musicOnIcon.classList.add("hidden");
                 musicOffIcon.classList.remove("hidden");
+                musicBtn.classList.remove("is-playing");
             } else {
                 musicOnIcon.classList.remove("hidden");
                 musicOffIcon.classList.add("hidden");
+                musicBtn.classList.add("is-playing");
             }
         }
 
