@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://yalda-ali-wedding.com">
     <meta property="og:type" content="website">
     
-    <!-- Fonts -->
+    <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;800&display=swap" rel="stylesheet">
     
@@ -43,6 +43,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         /* Fixed Nastaliq Header for Mobile and Desktop */
@@ -143,7 +144,6 @@
             transform: translateY(0);
         }
 
-        /* Improved & Larger Banner Image */
         .image-banner-container {
             max-width: 1100px;
             margin: 0 auto 5rem auto;
@@ -152,7 +152,7 @@
 
         .image-banner {
             width: 100%;
-            height: clamp(400px, 65vh, 700px); /* Responsive height */
+            height: clamp(400px, 65vh, 700px);
             background-image: url('https://i.postimg.cc/BnBHp7Gk/unnamed-(2).jpg');
             background-size: cover;
             background-position: center 40%;
@@ -162,7 +162,6 @@
         }
 
         .section-title-main {
-            font-family: 'Vazirmatn', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
             color: var(--sage-dark);
@@ -251,7 +250,7 @@
             position: relative;
             z-index: 10;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: currentColor;
+            color: var(--text-main);
         }
         
         .music-control:hover {
@@ -273,20 +272,11 @@
         }
 
         @keyframes float-heart {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0; }
         }
 
-        /* RSVP Message Styles */
         #rsvpSuccessMessage {
             display: none;
             animation: fadeIn 0.8s ease-out;
@@ -296,6 +286,8 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -303,12 +295,14 @@
     <!-- Background Music -->
     <audio id="bgMusic" loop preload="auto">
         <source src="hochzeitssong.mp3" type="audio/mpeg">
-        Ihr Browser unterstützt das Audio-Element nicht.
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="music-wrapper">
         <button id="musicBtn" class="music-control" onclick="toggleMusic()">
+            <!-- SVG Music On (Initially hidden) -->
             <svg id="musicOn" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <!-- SVG Music Off -->
             <svg id="musicOff" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
         </button>
     </div>
@@ -323,7 +317,7 @@
         </div>
     </header>
 
-    <!-- Banner Image (Now larger and more prominent) -->
+    <!-- Banner Image -->
     <div class="image-banner-container reveal">
         <div class="image-banner"></div>
     </div>
@@ -495,7 +489,7 @@
                 </form>
             </div>
 
-            <!-- Success Message (Initially Hidden) -->
+            <!-- Success Message -->
             <div id="rsvpSuccessMessage">
                 <div class="flex justify-center mb-8">
                     <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
@@ -534,7 +528,6 @@
         let hasInteracted = false;
         let heartInterval;
 
-        // Check if user has already submitted from this device
         window.addEventListener('load', () => {
             if (localStorage.getItem('wedding_rsvp_submitted')) {
                 showRSVPSuccess();
@@ -617,23 +610,14 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // RSVP Form Submission Handling
         rsvpForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // UI Feedback
             rsvpSubmitBtn.innerText = "در حال ارسال...";
             rsvpSubmitBtn.disabled = true;
 
-            // Simulate Network delay
             setTimeout(() => {
-                // Store submission status in browser
                 localStorage.setItem('wedding_rsvp_submitted', 'true');
-                
-                // Show success UI
                 showRSVPSuccess();
-                
-                // Scroll slightly to ensure visibility
                 document.getElementById('rsvpContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 1500);
         });
