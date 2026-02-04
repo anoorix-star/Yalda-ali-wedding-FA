@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کارت دعوت عروسی: یلدا و علی</title>
 
-    <!-- WhatsApp & Social Media Preview Tags -->
+    <!-- WhatsApp & Social Media Preview Tags (Open Graph) -->
     <meta property="og:title" content="کارت دعوت عروسی: یلدا و علی">
     <meta property="og:description" content="با خوشحالی شما را به جشن آغاز زندگی مشترکمان دعوت می‌کنیم.">
     <meta property="og:image" content="https://i.postimg.cc/J0bR8Kqj/Vorschau-E.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://yalda-ali-wedding.com">
     <meta property="og:type" content="website">
     
@@ -17,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Multi-source font declaration for maximum compatibility */
+        /* Import a more stable IranNastaliq font source */
         @font-face {
             font-family: 'IranNastaliq';
             src: url('https://cdn.fontcdn.ir/Font/Persian/IranNastaliq/IranNastaliq.woff2') format('woff2'),
@@ -43,17 +45,19 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Fixed Nastaliq Header for Mobile and Desktop */
         .nastaliq-header {
-            /* Force the font-family and use a cursive fallback */
             font-family: 'IranNastaliq', 'Vazirmatn', cursive !important;
-            font-size: clamp(3rem, 15vw, 6.5rem); 
-            line-height: 2.2; 
+            font-size: clamp(3.5rem, 18vw, 7.5rem); 
+            line-height: 1.8; 
             color: #2d2d2d;
             margin-bottom: 0.5rem;
             display: block;
             direction: rtl;
-            text-shadow: 0 0 1px rgba(0,0,0,0.1);
             text-align: center;
+            /* Reset any conflicting styles */
+            font-weight: normal;
+            font-style: normal;
         }
 
         .divider-container {
@@ -203,7 +207,6 @@
             font-weight: 300;
         }
 
-        /* Music Control Button & Heart Animation */
         .music-wrapper {
             position: fixed;
             bottom: 20px;
@@ -231,7 +234,6 @@
             color: currentColor;
         }
         
-        /* Green state when playing */
         .music-control.is-playing {
             background: var(--music-green);
             color: white;
@@ -278,6 +280,7 @@
 
     <!-- Header Section -->
     <header class="pt-24 pb-12 text-center reveal">
+        <!-- Re-applying the Nastaliq class with specific text -->
         <h1 class="nastaliq-header">یلدا و علی</h1>
         <div class="divider-container px-6">
             <div class="line"></div>
@@ -461,7 +464,6 @@
     </footer>
 
     <script>
-        // Musik & Heart Logic
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         const musicOnIcon = document.getElementById("musicOn");
@@ -474,54 +476,30 @@
             const heart = document.createElement("div");
             heart.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
             heart.className = "heart";
-            
-            // Random translation values for movement
             const tx = (Math.random() - 0.5) * 200;
             const ty = -Math.random() * 200 - 50;
             heart.style.setProperty('--tx', `${tx}px`);
             heart.style.setProperty('--ty', `${ty}px`);
-            
             musicWrapper.appendChild(heart);
-            
-            // Remove element after animation ends
-            setTimeout(() => {
-                heart.remove();
-            }, 2500);
+            setTimeout(() => { heart.remove(); }, 2500);
         }
 
-        function startHearts() {
-            if (!heartInterval) {
-                heartInterval = setInterval(createHeart, 400);
-            }
-        }
+        function startHearts() { if (!heartInterval) { heartInterval = setInterval(createHeart, 400); } }
+        function stopHearts() { clearInterval(heartInterval); heartInterval = null; }
 
-        function stopHearts() {
-            clearInterval(heartInterval);
-            heartInterval = null;
-        }
-
-        // Funktion zum Starten der Musik
         function playMusic() {
             if (!hasInteracted) {
                 music.play().then(() => {
                     hasInteracted = true;
                     updateMusicUI();
                     startHearts();
-                }).catch(err => {
-                    console.log("Autoplay blockiert. Warten auf Interaktion...");
-                });
+                }).catch(err => { console.log("Autoplay blocked."); });
             }
         }
 
         function toggleMusic() {
-            if (music.paused) {
-                music.play();
-                hasInteracted = true;
-                startHearts();
-            } else {
-                music.pause();
-                stopHearts();
-            }
+            if (music.paused) { music.play(); hasInteracted = true; startHearts(); } 
+            else { music.pause(); stopHearts(); }
             updateMusicUI();
         }
 
@@ -537,26 +515,21 @@
             }
         }
 
-        // Starte Musik bei der ersten Bewegung oder Klick des Nutzers
         window.addEventListener("scroll", playMusic, { once: true });
         window.addEventListener("click", playMusic, { once: true });
         window.addEventListener("touchstart", playMusic, { once: true });
 
-        // Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // Countdown
         const targetDate = new Date("April 10, 2026 16:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -570,7 +543,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // RSVP Formular Handling
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
