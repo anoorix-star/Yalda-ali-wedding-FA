@@ -50,7 +50,7 @@
             max-width: 600px;
             width: 90%;
             height: auto;
-            margin: 0 auto 1rem auto;
+            margin: 0 auto 3rem auto;
             display: block;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -314,11 +314,11 @@
      <line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
     </svg></button>
   </div><!-- Header Section -->
-  <header class="pt-32 pb-16 text-center reveal"><img src="https://i.postimg.cc/VkRTdcyg/Screenshot-. .jpg" alt="یلدا و علی" class="header-image" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #7d8c76 0%, #6b7a65 100%)'; this.alt='عکس موجود نیست';">
+  <header class="pt-32 pb-16 text-center reveal"><img src="https://i.postimg.cc/VkRTdcyg/Screenshot-. .jpg" alt="یلدا و علی" class="header-image" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #7d8c76 0%, #6b7a65 100%)'; this.alt='عک��� موجود ن����ست';">
    <div class="divider-container px-6">
     <div class="line"></div>
     <div class="invite-label text-center">
-     آغاز زندگی مشترکمان را با حضور شما جشن می‌گیریم
+     مشتاقِ میزبانی از شما هستیم
     </div>
     <div class="line"></div>
    </div>
@@ -412,7 +412,7 @@
      <div class="flex items-center gap-4">
       <div class="text-right">
        <h4 class="text-xl font-bold text-stone-800"><bdo dir="ltr">Pension Christine</bdo></h4>
-       <p class="text-stone-500 text-sm flex items-center gap-1 justify-end">تقریباً ۵ دقیقه فاصله 
+       <p class="text-stone-500 text-sm flex items-center gap-1 justify-end">تقریب��ً ۵ دقیقه فاصله 
         <svg width="14" height="14" viewbox="0 0 24 24" fill="#e11d48">
          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3" fill="white"></circle>
         </svg></p>
@@ -429,11 +429,11 @@
     <div id="rsvpFormContent">
      <h2 class="section-title-main">تأیید حضور</h2>
      <p class="text-stone-600 text-xl mb-12 font-light">برای کمک به ما در برنامه‌ریزی دقیق این روز، لطفاً تا تاریخ<br><span class="font-bold text-stone-900 border-b-2 border-sage/30">۱۰.۰۳.۲۰۲۶</span> به ما اطلاع دهید.</p>
-     <form id="rsvpForm" class="space-y-8 text-right">
-      <div><label class="rsvp-label">نام شما</label> <input type="text" id="guestName" required placeholder="نام مهمانان..." class="form-input">
+     <form id="rsvpForm" action="https://formspree.io/f/mkobvano" method="POST" class="space-y-8 text-right">
+      <div><label class="rsvp-label">نام شما</label> <input type="text" name="name" id="guestName" required placeholder="نام مهمانان..." class="form-input">
       </div>
       <div><label class="rsvp-label">آیا در مراسم شرکت می‌کنید؟</label>
-       <div class="relative"><select id="attendanceStatus" required class="form-input bg-white/90 appearance-none cursor-pointer"> <option value="">لطفاً انتخاب کنید...</option> <option value="yes">بله، با کمال میل</option> <option value="no">متأسفانه خیر</option> </select>
+       <div class="relative"><select name="attendance" id="attendanceStatus" required class="form-input bg-white/90 appearance-none cursor-pointer"> <option value="">لطفاً انتخاب کنید...</option> <option value="yes">بله، با کمال میل</option> <option value="no">متأسفانه خیر</option> </select>
         <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-stone-400">
          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="6 9 12 15 18 9"></polyline>
@@ -441,7 +441,7 @@
         </div>
        </div>
       </div>
-      <div><label class="rsvp-label">پیام</label> <textarea id="guestMessage" placeholder="پیام شما برای ما..." rows="4" class="form-input resize-none"></textarea>
+      <div><label class="rsvp-label">پیام</label> <textarea name="message" id="guestMessage" placeholder="پیام شما برای ما..." rows="4" class="form-input resize-none"></textarea>
       </div><button type="submit" id="rsvpSubmitBtn" class="map-btn py-5 text-xl mt-6 shadow-xl shadow-sage/30 font-bold">ارسال پاسخ</button>
      </form>
     </div><!-- Success Message -->
@@ -452,9 +452,9 @@
        </svg>
       </div>
      </div>
-     <h2 class="text-3xl font-bold text-stone-800 mb-4">با تشکر!</h2>
-     <p class="text-stone-600 text-xl leading-relaxed">پاسخ شما با موفقیت ثبت شد.<br>
-       از اینکه ما را در جریان حضور خود قرار دادید سپاسگزاریم.</p>
+     <h2 class="text-3xl font-bold text-stone-800 mb-4">ب�� تشکر!</h2>
+     <p class="text-stone-600 text-xl leading-relaxed">پاسخ شما با موفقیت ��بت شد.<br>
+       از اینکه ما را در جریان ��ضور خود قرار دا��ید سپاسگزاریم.</p>
     </div>
    </div>
   </section><!-- Footer Signature -->
@@ -564,12 +564,30 @@
             rsvpSubmitBtn.innerText = "در حال ارسال...";
             rsvpSubmitBtn.disabled = true;
 
-            setTimeout(() => {
-                localStorage.setItem('wedding_rsvp_submitted', 'true');
-                showRSVPSuccess();
-                document.getElementById('rsvpContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1500);
+            const formData = new FormData(rsvpForm);
+
+            fetch(rsvpForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    localStorage.setItem('wedding_rsvp_submitted', 'true');
+                    showRSVPSuccess();
+                    document.getElementById('rsvpContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    rsvpSubmitBtn.innerText = "ارسال پاسخ";
+                    rsvpSubmitBtn.disabled = false;
+                    alert('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+                }
+            }).catch(error => {
+                rsvpSubmitBtn.innerText = "ارسال پاسخ";
+                rsvpSubmitBtn.disabled = false;
+                alert('خطایی رخ داد. لطفاً دوباره ت��اش کنید.');
+            });
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c8d6d5326916512',t:'MTc3MDI0MjI4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c8da101c1b1dbeb',t:'MTc3MDI0NDM5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
