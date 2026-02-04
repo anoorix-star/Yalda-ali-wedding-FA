@@ -48,16 +48,16 @@
         /* Fixed Nastaliq Header for Mobile and Desktop */
         .nastaliq-header {
             font-family: 'IranNastaliq', 'Vazirmatn', cursive !important;
-            font-size: clamp(3.5rem, 18vw, 7.5rem); 
-            line-height: 1.8; 
+            font-size: clamp(4rem, 20vw, 8.5rem); 
+            line-height: 1.6; 
             color: #2d2d2d;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             display: block;
             direction: rtl;
             text-align: center;
-            /* Reset any conflicting styles */
             font-weight: normal;
             font-style: normal;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .divider-container {
@@ -82,13 +82,14 @@
 
         .content-card {
             background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border-radius: 3rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            padding: 3rem;
+            padding: 4rem 2rem;
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.4);
         }
 
         .info-card {
@@ -100,55 +101,69 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         .map-btn {
             background-color: var(--sage);
             color: white;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
             font-weight: 600;
             margin-top: 10px;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s;
             text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(125, 140, 118, 0.2);
         }
 
         .map-btn:hover {
             background-color: var(--sage-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(125, 140, 118, 0.3);
         }
 
         .countdown-box {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid #e5dfd9;
-            border-radius: 1rem;
-            padding: 10px;
-            min-width: 65px;
+            border-radius: 1.25rem;
+            padding: 12px;
+            min-width: 75px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Improved & Larger Banner Image */
+        .image-banner-container {
+            max-width: 1100px;
+            margin: 0 auto 5rem auto;
+            padding: 0 1.5rem;
+        }
+
         .image-banner {
             width: 100%;
-            height: 450px;
+            height: clamp(400px, 65vh, 700px); /* Responsive height */
             background-image: url('https://i.postimg.cc/BnBHp7Gk/unnamed-(2).jpg');
             background-size: cover;
-            background-position: center 30%;
-            border-radius: 3rem;
+            background-position: center 40%;
+            border-radius: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 8px solid white;
         }
 
         .section-title-main {
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--sage-dark);
             margin-bottom: 1.5rem;
@@ -166,51 +181,56 @@
 
         .form-input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            border-radius: 1.25rem;
+            padding: 1.1rem 1.5rem;
+            border-radius: 1.5rem;
             border: 1px solid #e5dfd9;
             background-color: rgba(255, 255, 255, 0.9);
             color: #374151;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
         }
 
         .form-input:focus {
             border-color: var(--sage);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(125, 140, 118, 0.1);
         }
 
         .hotel-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            margin-bottom: 1rem;
-            transition: transform 0.2s;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1.75rem;
+            border-radius: 2rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid transparent;
         }
 
         .hotel-item:hover {
-            transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transform: scale(1.02);
+            background: white;
+            border-color: var(--sage);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
         .footer-signature {
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-            color: #a3a3a3;
+            font-size: 0.8rem;
+            letter-spacing: 0.4em;
+            color: #888;
             text-transform: uppercase;
-            padding: 4rem 0 6rem 0;
+            padding: 5rem 0 7rem 0;
             text-align: center;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .music-wrapper {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            bottom: 30px;
+            left: 30px;
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -220,20 +240,24 @@
         .music-control {
             background: white;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
             cursor: pointer;
             border: none;
             position: relative;
             z-index: 10;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: currentColor;
         }
         
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
         .music-control.is-playing {
             background: var(--music-green);
             color: white;
@@ -273,14 +297,13 @@
 
     <div class="music-wrapper">
         <button id="musicBtn" class="music-control" onclick="toggleMusic()">
-            <svg id="musicOn" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            <svg id="musicOff" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <svg id="musicOn" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <svg id="musicOff" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
         </button>
     </div>
 
     <!-- Header Section -->
-    <header class="pt-24 pb-12 text-center reveal">
-        <!-- Re-applying the Nastaliq class with specific text -->
+    <header class="pt-32 pb-16 text-center reveal">
         <h1 class="nastaliq-header">یلدا و علی</h1>
         <div class="divider-container px-6">
             <div class="line"></div>
@@ -289,20 +312,20 @@
         </div>
     </header>
 
-    <!-- Banner Image -->
-    <div class="max-w-5xl mx-auto px-6 mb-16 reveal">
+    <!-- Banner Image (Now larger and more prominent) -->
+    <div class="image-banner-container reveal">
         <div class="image-banner"></div>
     </div>
 
     <!-- Main Message -->
-    <section class="px-6 mb-16 reveal">
+    <section class="px-6 mb-24 reveal">
         <div class="content-card">
-            <p class="text-2xl md:text-3xl italic text-stone-500 mb-8 font-light">
+            <p class="text-3xl md:text-4xl italic text-stone-500 mb-10 font-light">
                 "دو قلب، یک تپش. دو روح، یک پیمان."
             </p>
-            <div class="space-y-4">
-                <p class="text-stone-700 text-xl font-light">خانواده و دوستان عزیز،</p>
-                <p class="text-stone-600 text-lg leading-relaxed font-light">
+            <div class="space-y-6">
+                <p class="text-stone-700 text-2xl font-light">خانواده و دوستان عزیز،</p>
+                <p class="text-stone-600 text-xl leading-loose font-light">
                     ما با کمال مسرت آغاز سفر زندگی مشترکمان را<br>
                     در کنار همه شما جشن می‌گیریم.
                 </p>
@@ -311,10 +334,10 @@
     </section>
 
     <!-- When & Where -->
-    <section class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+    <section class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 mb-24">
         <div class="info-card reveal">
-            <div class="mb-6">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1.5">
+            <div class="mb-8">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1.2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
                     <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -322,43 +345,43 @@
                 </svg>
             </div>
             <h3 class="text-2xl text-sage-dark font-light mb-4">زمان مراسم؟</h3>
-            <h4 class="text-3xl font-bold text-stone-800 mb-2">۱۰.۰۴.۲۰۲۶</h4>
-            <p class="text-stone-600 mb-10">شروع مراسم از ساعت ۱۶:۰۰</p>
-            <p class="text-xs uppercase tracking-widest text-stone-500 mb-4 italic">شمارش معکوس تا روز موعود</p>
-            <div class="flex gap-3">
+            <h4 class="text-4xl font-bold text-stone-800 mb-2">۱۰.۰۴.۲۰۲۶</h4>
+            <p class="text-stone-600 mb-10 text-lg">شروع مراسم از ساعت ۱۶:۰۰</p>
+            <p class="text-xs uppercase tracking-widest text-stone-400 mb-5 italic">شمارش معکوس تا روز موعود</p>
+            <div class="flex gap-4">
                 <div class="countdown-box text-center">
-                    <span id="days" class="block text-xl font-bold">00</span>
-                    <span class="text-[10px] text-stone-500 uppercase">روز</span>
+                    <span id="days" class="block text-2xl font-bold">00</span>
+                    <span class="text-[11px] text-stone-500 uppercase">روز</span>
                 </div>
                 <div class="countdown-box text-center">
-                    <span id="hours" class="block text-xl font-bold">00</span>
-                    <span class="text-[10px] text-stone-500 uppercase">ساعت</span>
+                    <span id="hours" class="block text-2xl font-bold">00</span>
+                    <span class="text-[11px] text-stone-500 uppercase">ساعت</span>
                 </div>
                 <div class="countdown-box text-center">
-                    <span id="minutes" class="block text-xl font-bold">00</span>
-                    <span class="text-[10px] text-stone-500 uppercase">دقیقه</span>
+                    <span id="minutes" class="block text-2xl font-bold">00</span>
+                    <span class="text-[11px] text-stone-500 uppercase">دقیقه</span>
                 </div>
                 <div class="countdown-box text-center">
-                    <span id="seconds" class="block text-xl font-bold">00</span>
-                    <span class="text-[10px] text-stone-500 uppercase">ثانیه</span>
+                    <span id="seconds" class="block text-2xl font-bold">00</span>
+                    <span class="text-[11px] text-stone-500 uppercase">ثانیه</span>
                 </div>
             </div>
         </div>
 
         <div class="info-card reveal">
-            <div class="mb-6">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1.5">
+            <div class="mb-8">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1.2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                 </svg>
             </div>
             <h3 class="text-2xl text-sage-dark font-light mb-4">مکان مراسم؟</h3>
-            <h4 class="text-xl font-bold text-stone-800 italic mb-2">Almas Event Center</h4>
-            <p class="text-stone-600 text-center max-w-[200px]">
+            <h4 class="text-2xl font-bold text-stone-800 italic mb-2">Almas Event Center</h4>
+            <p class="text-stone-600 text-center text-lg max-w-[220px]">
                 Achtzehnmorgenweg 8<br>
                 61250 Usingen, Germany
             </p>
-            <div class="w-full mt-10 space-y-3 px-4">
+            <div class="w-full mt-10 space-y-4 px-4 max-w-sm">
                 <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=Achtzehnmorgenweg+8+61250+Usingen+Germany')" class="map-btn">مسیریابی با نقشه گوگل</button>
                 <button onclick="window.open('http://maps.apple.com/?q=Achtzehnmorgenweg+8+61250+Usingen+Germany')" class="map-btn">مسیریابی با نقشه اپل</button>
             </div>
@@ -366,16 +389,16 @@
     </section>
 
     <!-- Accommodation Section -->
-    <section class="max-w-3xl mx-auto px-6 mb-24 reveal">
-        <div class="text-center mb-12">
-            <div class="flex justify-center mb-4">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1.2">
+    <section class="max-w-3xl mx-auto px-6 mb-32 reveal">
+        <div class="text-center mb-16">
+            <div class="flex justify-center mb-6">
+                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#2d2d2d" stroke-width="1">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
             </div>
-            <h2 class="section-title-main">گزینه‌های اقامت</h2>
-            <p class="text-stone-600 text-lg font-light px-4">
+            <h2 class="section-title-main text-3xl">گزینه‌های اقامت</h2>
+            <p class="text-stone-500 text-xl font-light px-4">
                 برای مهمانانی که از راه دور می‌آیند، چند پیشنهاد در نزدیکی محل مراسم داریم:
             </p>
         </div>
@@ -391,7 +414,7 @@
                         </p>
                     </div>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-colors"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-all"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </div>
 
             <div class="hotel-item group" onclick="window.open('https://www.google.com/maps/search/Landgasthof+Eschbacher+Katz')">
@@ -404,7 +427,7 @@
                         </p>
                     </div>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-colors"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-all"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </div>
 
             <div class="hotel-item group" onclick="window.open('https://www.google.com/maps/search/Pension+Christine+Usingen')">
@@ -417,21 +440,21 @@
                         </p>
                     </div>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-colors"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" class="group-hover:stroke-sage transition-all"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </div>
         </div>
     </section>
 
     <!-- RSVP Section -->
-    <section class="max-w-2xl mx-auto px-6 mb-24 reveal">
-        <div class="bg-white/60 backdrop-blur-sm rounded-[3rem] p-12 shadow-sm text-center border border-[#e5dfd9]">
+    <section class="max-w-2xl mx-auto px-6 mb-32 reveal">
+        <div class="bg-white/70 backdrop-blur-md rounded-[3.5rem] p-12 md:p-16 shadow-xl shadow-stone-200/50 text-center border border-white">
             <h2 class="section-title-main">تأیید حضور</h2>
-            <p class="text-stone-600 text-lg mb-10 font-light">
+            <p class="text-stone-600 text-xl mb-12 font-light">
                 برای کمک به ما در برنامه‌ریزی دقیق این روز، لطفاً تا تاریخ<br>
-                <span class="font-bold text-stone-800">۱۰.۰۳.۲۰۲۶</span> به ما اطلاع دهید.
+                <span class="font-bold text-stone-900 border-b-2 border-sage/30">۱۰.۰۳.۲۰۲۶</span> به ما اطلاع دهید.
             </p>
             
-            <form id="rsvpForm" class="space-y-6 text-right">
+            <form id="rsvpForm" class="space-y-8 text-right">
                 <div>
                     <label class="rsvp-label">نام شما</label>
                     <input type="text" placeholder="نام مهمانان..." class="form-input">
@@ -439,11 +462,16 @@
                 
                 <div>
                     <label class="rsvp-label">آیا در مراسم شرکت می‌کنید؟</label>
-                    <select class="form-input bg-white/90 appearance-none cursor-pointer">
-                        <option value="">لطفاً انتخاب کنید...</option>
-                        <option value="yes">بله، با کمال میل</option>
-                        <option value="no">متأسفانه خیر</option>
-                    </select>
+                    <div class="relative">
+                        <select class="form-input bg-white/90 appearance-none cursor-pointer">
+                            <option value="">لطفاً انتخاب کنید...</option>
+                            <option value="yes">بله، با کمال میل</option>
+                            <option value="no">متأسفانه خیر</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center text-stone-400">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
@@ -451,7 +479,7 @@
                     <textarea placeholder="پیام شما برای ما..." rows="4" class="form-input resize-none"></textarea>
                 </div>
 
-                <button type="submit" class="map-btn py-4 text-lg mt-4 shadow-lg shadow-sage/20 font-bold">ارسال پاسخ</button>
+                <button type="submit" class="map-btn py-5 text-xl mt-6 shadow-xl shadow-sage/30 font-bold">ارسال پاسخ</button>
             </form>
         </div>
     </section>
@@ -459,7 +487,7 @@
     <!-- Footer Signature -->
     <footer class="reveal">
         <div class="footer-signature">
-            YALDA & ALI — 10.04.2026
+            YALDA & ALI — 10.04.2026 — WITH LOVE
         </div>
     </footer>
 
@@ -474,17 +502,17 @@
 
         function createHeart() {
             const heart = document.createElement("div");
-            heart.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+            heart.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
             heart.className = "heart";
-            const tx = (Math.random() - 0.5) * 200;
-            const ty = -Math.random() * 200 - 50;
+            const tx = (Math.random() - 0.5) * 250;
+            const ty = -Math.random() * 250 - 80;
             heart.style.setProperty('--tx', `${tx}px`);
             heart.style.setProperty('--ty', `${ty}px`);
             musicWrapper.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 2500);
         }
 
-        function startHearts() { if (!heartInterval) { heartInterval = setInterval(createHeart, 400); } }
+        function startHearts() { if (!heartInterval) { heartInterval = setInterval(createHeart, 450); } }
         function stopHearts() { clearInterval(heartInterval); heartInterval = null; }
 
         function playMusic() {
@@ -524,7 +552,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+                if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
@@ -535,10 +563,10 @@
             const now = new Date().getTime();
             const distance = targetDate - now;
             if (distance < 0) return;
-            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
@@ -546,11 +574,13 @@
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button');
+            const originalText = btn.innerText;
             btn.innerText = "در حال ارسال...";
+            btn.disabled = true;
             setTimeout(() => {
                 btn.innerText = "سپاس! پاسخ شما ثبت شد.";
                 btn.style.backgroundColor = "#2d2d2d";
-            }, 1000);
+            }, 1200);
         });
     </script>
 </body>
