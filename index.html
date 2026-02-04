@@ -10,11 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Loading IranNastaliq */
+        /* Loading IranNastaliq with a more stable source and format support */
         @font-face {
             font-family: 'IranNastaliq';
             src: url('https://cdn.fontcdn.ir/Font/Persian/IranNastaliq/IranNastaliq.woff2') format('woff2'),
-                 url('https://cdn.fontcdn.ir/Font/Persian/IranNastaliq/IranNastaliq.woff') format('woff');
+                 url('https://cdn.fontcdn.ir/Font/Persian/IranNastaliq/IranNastaliq.woff') format('woff'),
+                 url('https://cdn.fontcdn.ir/Font/Persian/IranNastaliq/IranNastaliq.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -36,11 +37,13 @@
         }
 
         .nastaliq-header {
-            font-family: 'IranNastaliq', cursive;
-            font-size: 7rem;
-            line-height: 1.6;
+            font-family: 'IranNastaliq', 'Vazirmatn', cursive;
+            font-size: clamp(4rem, 15vw, 7rem); /* Responsive font size for mobile */
+            line-height: 1.8;
             color: #2d2d2d;
             margin-bottom: -1rem;
+            display: block;
+            direction: rtl;
         }
 
         .divider-container {
